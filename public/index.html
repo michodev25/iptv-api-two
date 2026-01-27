@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPTV Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Login Section -->
+        <div id="login-view" class="view">
+            <h1>Admin Login</h1>
+            <div class="form-group">
+                <input type="password" id="api-key" placeholder="Enter Admin API Key">
+                <button onclick="login()">Login</button>
+            </div>
+            <p id="login-error" class="error"></p>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard-view" class="view hidden">
+            <header>
+                <h1>IPTV User Management</h1>
+                <button onclick="logout()" class="secondary">Logout</button>
+            </header>
+
+            <div class="actions">
+            <div class="actions">
+                <button onclick="openCreateModal()">+ New User</button>
+                <button onclick="loadUsers()" class="icon-btn" title="Refresh">↻</button>
+            </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Status</th>
+                            <th>Devices</th>
+                            <th>Expires</th>
+                            <th>Playlist URL</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                        <!-- Rows injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Edit User Modal -->
+        <div id="edit-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Edit User</h2>
+                <input type="hidden" id="edit-username">
+                <div class="form-group">
+                    <label>Max Devices:</label>
+                    <input type="number" id="edit-max-devices" min="1" max="10">
+                </div>
+                <div class="form-group">
+                    <label>Expiration Date:</label>
+                    <input type="date" id="edit-expires">
+                </div>
+                <div class="form-group">
+                    <label>Strict IP Mode:</label>
+                    <select id="edit-strict-mode">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="actions">
+                    <button onclick="saveUserChanges()">Save</button>
+                    <button onclick="closeEditModal()" class="secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <!-- Create User Modal -->
+        <div id="user-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Create New User</h2>
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" id="create-username" placeholder="Enter username">
+                </div>
+                <div class="actions">
+                    <button onclick="submitCreateUser()">Create</button>
+                    <button onclick="closeCreateModal()" class="secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete User Modal -->
+        <div id="delete-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Delete User</h2>
+                <p>Are you sure you want to delete <strong id="delete-username-display"></strong>?</p>
+                <p class="warning">This action cannot be undone.</p>
+                <input type="hidden" id="delete-username">
+                <div class="actions">
+                    <button onclick="submitDeleteUser()" class="danger">Yes, Delete</button>
+                    <button onclick="closeDeleteModal()" class="secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+</body>
+<script src="js/app.js"></script>
+</html>
