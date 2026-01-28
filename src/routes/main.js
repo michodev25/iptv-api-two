@@ -10,7 +10,7 @@ const db = require('../config/db');
 // --- Admin Middleware (Simple API Key) ---
 const adminAuth = (req, res, next) => {
     const apiKey = req.headers['x-admin-key'];
-    if (apiKey === (process.env.ADMIN_KEY || 'admin123')) { // Fallback for demo
+    if (apiKey === (process.env.ADMIN_KEY)) { // Fallback for demo
         next();
     } else {
         res.status(403).send('Admin Access Denied');
