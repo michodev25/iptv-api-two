@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const https = require('https');
 const http = require('http');
@@ -59,5 +59,9 @@ const startServer = () => {
 };
 
 startServer();
-
+ console.log("PASSWORD:", process.env.DB_PASSWORD);
+    console.log("USER:", process.env.DB_USER);
+    console.log("HOST:", process.env.DB_HOST);
+    console.log("PORT:", process.env.DB_PORT);
+    console.log("NAME:", process.env.DB_NAME);
 module.exports = app; // For testing

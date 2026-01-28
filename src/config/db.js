@@ -1,12 +1,17 @@
 const path = require('path');
 const fs = require('fs');
 
-const isProduction = !!process.env.DATABASE_URL;
+// const isProduction = !!process.env.DATABASE_URL; // Unused now
+
 
 const config = {
-    client: isProduction ? 'pg' : 'sqlite3',
-    connection: isProduction ? process.env.DATABASE_URL : {
-        filename: path.resolve(__dirname, '../../data/iptv.db')
+    client: 'pg',
+    connection: process.env.DATABASE_URL || {
+        host: process.env.DB_HOST ,
+        port: process.env.DB_PORT ,
+        user: process.env.DB_USER ,
+        password: process.env.DB_PASSWORD ,
+        database: process.env.DB_NAME 
     },
     useNullAsDefault: true,
     pool: {
@@ -15,7 +20,7 @@ const config = {
     }
 };
 
-if (isProduction && config.connection) {
+if (process.env.NODE_ENV === 'production' && process.env.DATABASE_URL) {
     // For Heroku/Render Postgres - self-signed certs often needed
     config.connection = {
         connectionString: process.env.DATABASE_URL,
@@ -24,14 +29,6 @@ if (isProduction && config.connection) {
 }
 
 const knex = require('knex')(config);
-
-// Ensure data directory exists for local sqlite
-if (!isProduction) {
-    const dbDir = path.dirname(config.connection.filename);
-    if (!fs.existsSync(dbDir)) {
-        fs.mkdirSync(dbDir, { recursive: true });
-    }
-}
 
 async function initDb() {
     try {
