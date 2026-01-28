@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001/admin';
+const API_URL = process.env.API_URL;
 let ADMIN_KEY = sessionStorage.getItem('adminKey') || '';
 
 // Init
