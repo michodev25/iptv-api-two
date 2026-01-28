@@ -129,11 +129,13 @@ router.post('/admin/users/:username/regenerate', adminAuth, async (req, res) => 
 });
 
 // View Logs (Simple dump)
-router.get('/admin/logs', adminAuth, (req, res) => {
-    db.all(`SELECT * FROM access_logs ORDER BY timestamp DESC LIMIT 100`, (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(rows);
-    });
+router.get('/admin/logs', adminAuth, async (req, res) => {
+    try {
+        const logs = await db('access_logs').orderBy('timestamp', 'desc').limit(100);
+        res.json(logs);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 // Delete User
