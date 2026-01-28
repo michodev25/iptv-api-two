@@ -40,7 +40,7 @@ const startServer = () => {
     httpServer.listen(PORT, () => {
         console.log(`HTTP Server running on port ${PORT}`);
     });
-
+ console.log(process.env.ADMIN_KEY)
     // HTTPS Server
     // Uncomment the lines below to enable HTTPS when you have certificates
     /*
@@ -61,9 +61,4 @@ const startServer = () => {
 };
 
 startServer();
- console.log("PASSWORD:", process.env.DB_PASSWORD);
-    console.log("USER:", process.env.DB_USER);
-    console.log("HOST:", process.env.DB_HOST);
-    console.log("PORT:", process.env.DB_PORT);
-    console.log("NAME:", process.env.DB_NAME);
 module.exports = app; // For testing
