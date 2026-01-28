@@ -7,6 +7,7 @@ const path = require('path');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const mainRoutes = require('./src/routes/main');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,6 +20,7 @@ app.use(helmet({
 app.use(morgan('combined')); // Logging
 app.use(express.json()); // Body parser
 app.set('trust proxy', 1); // For Reverse Proxy (Nginx) support
+app.use(cors({ origin: "https://iptv-api-two.onrender.com"}));
 
 // Routes
 app.use(express.static(path.join(__dirname, 'public')));
