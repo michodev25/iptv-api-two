@@ -1,6 +1,5 @@
-const API_URL = process.env.API_URL;
+const API_URL = 'https://iptv-api-two.onrender.com/admin';
 let ADMIN_KEY = sessionStorage.getItem('adminKey') || '';
-
 // Init
 document.addEventListener('DOMContentLoaded', () => {
     if (ADMIN_KEY) {
