@@ -23,9 +23,7 @@ app.set('trust proxy', 1); // For Reverse Proxy (Nginx) support
 app.use(cors({ origin: "https://iptv-api-two.onrender.com"}));
 
 // Routes
-app.use(express.static("public"));
-
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', mainRoutes);
 
 // Error Handling

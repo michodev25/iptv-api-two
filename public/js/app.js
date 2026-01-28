@@ -1,4 +1,4 @@
-const API_URL = 'https://iptv-api-two-production.up.railway.app/admin';
+const API_URL = 'https://iptv-api-two.onrender.com/admin';
 let ADMIN_KEY = sessionStorage.getItem('adminKey') || '';
 // Init
 document.addEventListener('DOMContentLoaded', () => {
