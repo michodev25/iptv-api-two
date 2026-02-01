@@ -19,7 +19,7 @@ const adminAuth = (req, res, next) => {
 
 // --- Stream Route ---
 router.get('/playlist.m3u', streamAuth, (req, res) => {
-    const m3uPath = path.resolve(__dirname, '../../data/exported.m3u');
+    const m3uPath = path.resolve(__dirname, "public", "playlist.m3u");
     
     // In production, we might want to read valid channels from DB or parse the M3U.
     // Requirement 1: Serve M3U file.

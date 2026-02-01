@@ -1,4 +1,5 @@
 const API_URL = 'https://iptv-api-two.onrender.com/admin';
+// const API_URL = 'http://localhost:3001/admin';
 let ADMIN_KEY = sessionStorage.getItem('adminKey') || '';
 // Init
 document.addEventListener('DOMContentLoaded', () => {
